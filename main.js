@@ -14,6 +14,17 @@ function opentab(tabname){
     document.getElementById(tabname).classList.add("active-tab")
 }
 
+var sideMenu = document.getElementById("sideMenu")
+
+function openmenu(){
+  sideMenu.style.right = "0"
+}
+
+function closemenu(){
+  sideMenu.style.right = "-200px"
+}
+
+
 
 var c = document.getElementById('canv');
 var $ = c.getContext('2d');
@@ -67,5 +78,16 @@ form.addEventListener('submit', e => {
     .catch(error => console.error('Error!', error.message))
 })
 
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else {
+        entry.target.classList.remove('show');
+      }
+  });
+});
 
+const hiddenElements = document.querySelectorAll('.hidden');
+hiddenElements.forEach((el) => observer.observe(el));
 
